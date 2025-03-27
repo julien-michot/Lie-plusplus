@@ -16,6 +16,7 @@
 #define SEn3_HPP
 
 #include <array>
+#include <type_traits>
 
 #include "SO3.hpp"
 
@@ -569,7 +570,8 @@ class SEn3
   SO3Type C_;         //!< SO3 object the rotational component of SEn3
   IsometriesType t_;  //!< R6 vector representing the n translational components of SEn3
 
-  static constexpr FPType eps_ = std::is_same_v<FPType, float> ? 1.0e-6 : 1.0e-9;  //!< Epsilon
+  using EpsType = std::conditional_t<std::is_same_v<FPType, float> || std::is_same_v<FPType, double>, FPType, double>;
+  static constexpr EpsType eps_ = std::is_same_v<FPType, float> ? 1.0e-6f : 1.0e-9;  //!< Epsilon
 };
 
 using SE3d = SEn3<double, 1>;   //!< The SE3 group with double precision floating point
