@@ -36,20 +36,23 @@ if(LIEPLUSPLUS_TESTS)
 endif()
 
 # Eigen
-FetchContent_Declare(
-    Eigen
-    GIT_REPOSITORY  https://gitlab.com/libeigen/eigen.git
-    GIT_TAG         3.4.0
-    GIT_SHALLOW     TRUE
-    GIT_PROGRESS    TRUE
-)
-set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
-set(EIGEN_BUILD_DOC OFF)
-set(EIGEN_BUILD_PKGCONFIG OFF)
-set(EIGEN_TEST_CXX11 ON)
-set(EIGEN_HAS_CXX11_MATH ON)
-list(APPEND external Eigen)
-list(APPEND libs Eigen3::Eigen)
+find_package(Eigen3 NO_MODULE)
+if (NOT EIGEN3_FOUND)
+    FetchContent_Declare(
+        Eigen
+        GIT_REPOSITORY  https://gitlab.com/libeigen/eigen.git
+        GIT_TAG         3.4.0
+        GIT_SHALLOW     TRUE
+        GIT_PROGRESS    TRUE
+    )
+    set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+    set(EIGEN_BUILD_DOC OFF)
+    set(EIGEN_BUILD_PKGCONFIG OFF)
+    set(EIGEN_TEST_CXX11 ON)
+    set(EIGEN_HAS_CXX11_MATH ON)
+    list(APPEND external Eigen)
+    list(APPEND libs Eigen3::Eigen)
+endif()
 
 FetchContent_MakeAvailable(${external})
 
