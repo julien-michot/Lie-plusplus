@@ -248,6 +248,16 @@ class Gal3
 
   /**
    * @brief The logarithmic map for Gal3.
+   *
+   * @return R10 vector
+   */
+  [[nodiscard]] VectorType log() const
+  {
+    return Gal3<FPType>::log(*this);
+  }
+
+  /**
+   * @brief The logarithmic map for Gal3.
    * Return a vector given a Gal3 object (equivalent to vee(log(X)))
    *
    * @param X Gal3 group element
@@ -582,7 +592,8 @@ class Gal3
   IsometriesType t_;  //!< The translation vectors (isometries) of the Gal3 element
   Scalar s_;          //!< Scalar factor of the Gal3 group
 
-  static constexpr FPType eps_ = std::is_same_v<FPType, float> ? 1.0e-6 : 1.0e-9;  //!< Epsilon
+  using EpsType = std::conditional_t<std::is_same_v<FPType, float> || std::is_same_v<FPType, double>, FPType, double>;
+  static constexpr EpsType eps_ = std::is_same_v<FPType, float> ? 1.0e-6f : 1.0e-9;  //!< Epsilon
 };
 
 using Gal3d = Gal3<double>;  //!< The Gal3 group with double precision floating point

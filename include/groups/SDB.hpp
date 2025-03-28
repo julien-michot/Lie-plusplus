@@ -67,6 +67,16 @@ class SemiDirectBias
 
   /**
    * @brief The logarithmic map for the Semi Direct Bias Group.
+   *
+   * @return R15 vector
+   */
+  [[nodiscard]] VectorType log() const
+  {
+    return SemiDirectBias<FPType>::log(*this);
+  }
+
+  /**
+   * @brief The logarithmic map for the Semi Direct Bias Group.
    * Return a vector given a SemiDirectBias object (equivalent to vee(log(X)))
    *
    * @param X SemiDirectBias group element

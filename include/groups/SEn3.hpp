@@ -247,6 +247,16 @@ class SEn3
 
   /**
    * @brief The logarithmic map for SEn3.
+   *
+   * @return R(3+3n) vector
+   */
+  [[nodiscard]] VectorType log() const
+  {
+    return SEn3::log(*this);
+  }
+
+  /**
+   * @brief The logarithmic map for SEn3.
    * Return a vector given a SEn3 object (equivalent to vee(log(X)))
    *
    * @param X SEn3 group element
@@ -399,6 +409,15 @@ class SEn3
       t[i] = -C_.R().transpose() * t_[i];
     }
     return SEn3(C_.R().transpose(), t);
+  }
+
+  /**
+   * @brief Get a constant copy of the inverse of the SEn3 object
+   *
+   * @return SEn3 group element
+   */
+  [[nodiscard]] const SEn3 inverse() const {
+    return inv();
   }
 
   /**

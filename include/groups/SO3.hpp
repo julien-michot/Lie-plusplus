@@ -258,6 +258,15 @@ class SO3
 
   /**
    * @brief The logarithmic map for SO3.
+   *
+   * @return R3 vector
+   */
+  [[nodiscard]] VectorType log() const {
+    return SO3::log(*this);
+  }
+
+  /**
+   * @brief The logarithmic map for SO3.
    * Return a vector given a SO3 object (equivalent to vee(log(X)))
    *
    * @param X SO3 group element
@@ -368,6 +377,12 @@ class SO3
    * @return SO3 group element
    */
   [[nodiscard]] const SO3 inv() const { return SO3(q_.inverse()); }
+  /**
+   * @brief Get a constant copy of the inverse of the SO3 object
+   *
+   * @return SO3 group element
+   */
+  [[nodiscard]] const SO3 inverse() const { return inv(); }
 
   /**
    * @brief Get a constant reference to the SO3 rotation matrix

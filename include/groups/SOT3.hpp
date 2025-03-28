@@ -216,6 +216,19 @@ class SOT3
    *
    * @return R4 vector
    */
+  [[nodiscard]] VectorType log() const
+  {
+    return SOT3<FPType>::log(*this);
+  }
+
+  /**
+   * @brief The logarithmic map for SOT3.
+   * Return a vector given a SOT3 object (equivalent to vee(log(X)))
+   *
+   * @param X SOT3 group element
+   *
+   * @return R4 vector
+   */
   [[nodiscard]] static const VectorType log(const SOT3& X)
   {
     VectorType u = VectorType::Zero();
@@ -402,7 +415,8 @@ class SOT3
   SO3Type C_;    //!< SO3 object the rotational component of SOT3
   ScaleType s_;  //!< Scale factor
 
-  static constexpr FPType eps_ = std::is_same_v<FPType, float> ? 1.0e-6 : 1.0e-9;  //!< Epsilon
+  using EpsType = std::conditional_t<std::is_same_v<FPType, float> || std::is_same_v<FPType, double>, FPType, double>;
+  static constexpr EpsType eps_ = std::is_same_v<FPType, float> ? 1.0e-6f : 1.0e-9;  //!< Epsilon
 };
 
 using SOT3d = SOT3<double>;  //!< The SOT3 group with double precision floating point

@@ -68,6 +68,16 @@ class Tangent
 
   /**
    * @brief The logarithmic map for the Tangent Group.
+   *
+   * @return VectorType vector
+   */
+   [[nodiscard]] VectorType log() const
+   {
+     return Tangent::log(*this);
+   }
+
+  /**
+   * @brief The logarithmic map for the Tangent Group.
    * Return a vector given a Tangent object (equivalent to vee(log(X)))
    *
    * @param X TG element
