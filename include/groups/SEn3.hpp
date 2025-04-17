@@ -349,6 +349,17 @@ class SEn3
   }
 
   /**
+   * @brief Casting to another scalar type
+   */
+  template <typename T2>
+  SEn3<T2, n> cast() const {
+    std::array<Eigen::Matrix<T2, 3, 1>, n> iso;
+    for (int i = 0; i < n; ++i)
+      iso[i] = t()[i].template cast<T2>();
+    return SEn3<T2, n>(q().template cast<T2>(), iso);
+  }
+
+  /**
    * @brief Operator * overloading.
    * Implements the SE3 action on a R3 vector
    *

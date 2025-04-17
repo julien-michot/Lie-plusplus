@@ -295,6 +295,14 @@ class SO3
     return u;
   }
 
+  /**
+   * @brief Casting to another scalar type
+   */
+   template <typename T2>
+   SO3<T2> cast() const {
+    return SO3<T2>(q().template cast<T2>());
+   }
+
   // /**
   //  * @brief The logarithmic map for SO3.
   //  * Return a so3 matrix given a SO3 object
