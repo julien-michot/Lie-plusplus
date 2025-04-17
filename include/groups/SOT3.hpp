@@ -291,13 +291,25 @@ class SOT3
   }
 
   /**
+   * @brief Operator *= overloading, implements the SOT3 composition this = this * other
+   *
+   * @param other SOT3 group element
+   *
+   * @return SOT3 group element
+   */
+   SOT3 &operator*=(const SOT3& other)
+   {
+     return multiplyRight(other);
+   }
+
+  /**
    * @brief Implements the SOT3 composition this = this * other
    *
    * @param other SOT3 group element
    *
    * @return SOT3 group element
    */
-  const SOT3& multiplyRight(const SOT3& other)
+  SOT3& multiplyRight(const SOT3& other)
   {
     C_.multiplyRight(other.C_);  // C_ * other.C_
     s_ *= other.s_;
@@ -311,7 +323,7 @@ class SOT3
    *
    * @return SOT3 group element
    */
-  const SOT3& multiplyLeft(const SOT3& other)
+  SOT3& multiplyLeft(const SOT3& other)
   {
     C_.multiplyLeft(other.C_);  // other.C_ * th.C_
     s_ *= other.s_;

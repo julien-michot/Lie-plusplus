@@ -344,13 +344,25 @@ class SO3
   }
 
   /**
+   * @brief Operator *= overloading, implements the SO3 composition this = this * other
+   *
+   * @param other SO3 group element
+   *
+   * @return SO3 group element
+   */
+   SO3 &operator*=(const SO3& other)
+   {
+     return multiplyRight(other);
+   }
+
+  /**
    * @brief Implements the SO3 composition this = this * other
    *
    * @param other SO3 group element
    *
    * @return SO3 group element
    */
-  const SO3& multiplyRight(const SO3& other)
+  SO3& multiplyRight(const SO3& other)
   {
     q_ = q_ * other.q_;
     R_ = R_ * other.R_;
@@ -364,7 +376,7 @@ class SO3
    *
    * @return SO3 group element
    */
-  const SO3& multiplyLeft(const SO3& other)
+  SO3& multiplyLeft(const SO3& other)
   {
     q_ = other.q_ * q_;
     R_ = other.R_ * R_;

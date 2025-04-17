@@ -129,13 +129,25 @@ class Tangent
   }
 
   /**
+   * @brief Operator *= overloading, implements the TG composition this = this * other
+   *
+   * @param other TG group element
+   *
+   * @return TG group element
+   */
+   Tangent &operator*=(const Tangent& other)
+   {
+     return multiplyRight(other);
+   }
+
+  /**
    * @brief Implements the Tangent composition this = this * other
    *
    * @param other TG group element
    *
    * @return TG group element
    */
-  const Tangent& multiplyRight(const Tangent& other)
+  Tangent& multiplyRight(const Tangent& other)
   {
     g_ = (g_ + G_.Adjoint() * other.g_).eval();
     G_.multiplyRight(other.G_);  // G_ * other.G_
@@ -149,7 +161,7 @@ class Tangent
    *
    * @return TG group element
    */
-  const Tangent& multiplyLeft(const Tangent& other)
+  Tangent& multiplyLeft(const Tangent& other)
   {
     g_ = (other.g_ + other.G_.Adjoint() * g_).eval();
     G_.multiplyLeft(other.G_);  // other.G_ * G_

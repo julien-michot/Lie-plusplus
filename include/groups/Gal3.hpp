@@ -333,13 +333,25 @@ class Gal3
   }
 
   /**
+   * @brief Operator *= overloading, implements the Gal3 composition this = this * other
+   *
+   * @param other Gal3 group element
+   *
+   * @return Gal3 group element
+   */
+   Gal3 &operator*=(const Gal3& other)
+   {
+     return multiplyRight(other);
+   }
+
+  /**
    * @brief Implements the Gal3 composition this = this * other
    *
    * @param other Gal3 group element
    *
    * @return Gal3 group element
    */
-  const Gal3& multiplyRight(const Gal3& other)
+  Gal3& multiplyRight(const Gal3& other)
   {
     t_[1] = (C_.R() * other.t_[1] + t_[0] * other.s_ + t_[1]).eval();
     t_[0] = (C_.R() * other.t_[0] + t_[0]).eval();
@@ -355,7 +367,7 @@ class Gal3
    *
    * @return Gal3 group element
    */
-  const Gal3& multiplyLeft(const Gal3& other)
+  Gal3& multiplyLeft(const Gal3& other)
   {
     t_[1] = (other.C_.R() * t_[1] + other.t_[0] * s_ + other.t_[1]).eval();
     t_[0] = (other.C_.R() * t_[0] + other.t_[0]).eval();

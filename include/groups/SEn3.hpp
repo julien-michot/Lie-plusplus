@@ -363,13 +363,25 @@ class SEn3
   }
 
   /**
+   * @brief Operator *= overloading, implements the SEn3 composition this = this * other
+   *
+   * @param other SEn3 group element
+   *
+   * @return SEn3 group element
+   */
+   SEn3 &operator*=(const SEn3& other)
+   {
+     return multiplyRight(other);
+   }
+
+  /**
    * @brief Implements the SEn3 composition this = this * other
    *
    * @param other SEn3 group element
    *
    * @return SEn3 group element
    */
-  const SEn3& multiplyRight(const SEn3& other)
+  SEn3& multiplyRight(const SEn3& other)
   {
     for (int i = 0; i < n; ++i)
     {

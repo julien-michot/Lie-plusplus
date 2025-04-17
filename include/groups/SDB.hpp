@@ -144,13 +144,25 @@ class SemiDirectBias
   }
 
   /**
+   * @brief Operator *= overloading, implements the SemiDirectBias composition this = this * other
+   *
+   * @param other SemiDirectBias group element
+   *
+   * @return SemiDirectBias group element
+   */
+   SemiDirectBias &operator*=(const SemiDirectBias& other)
+   {
+     return multiplyRight(other);
+   }
+
+  /**
    * @brief Implements the SemiDirectBias composition this = this * other
    *
    * @param other SemiDirectBias group element
    *
    * @return SemiDirectBias group element
    */
-  const SemiDirectBias& multiplyRight(const SemiDirectBias& other)
+  SemiDirectBias& multiplyRight(const SemiDirectBias& other)
   {
     delta_ = (delta_ + B().Adjoint() * other.delta_).eval();
     D_.multiplyRight(other.D_);  // D_ * other.D_
@@ -164,7 +176,7 @@ class SemiDirectBias
    *
    * @return SemiDirectBias group element
    */
-  const SemiDirectBias& multiplyLeft(const SemiDirectBias& other)
+  SemiDirectBias& multiplyLeft(const SemiDirectBias& other)
   {
     delta_ = (other.delta_ + other.B().Adjoint() * delta_).eval();
     D_.multiplyLeft(other.D_);  // other.D_ * th.D_
