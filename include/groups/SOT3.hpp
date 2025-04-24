@@ -285,7 +285,8 @@ class SOT3
    *
    * @return R3 vector
    */
-  [[nodiscard]] const typename SO3Type::VectorType operator*(const typename SO3Type::VectorType& other) const
+   template <typename Derived, typename = typename std::enable_if_t<Derived::RowsAtCompileTime == SO3Type::VectorType::RowsAtCompileTime>>
+   [[nodiscard]] const typename SO3Type::VectorType operator*(const Eigen::MatrixBase<Derived> &other) const
   {
     return s_ * (C_.R() * other);
   }

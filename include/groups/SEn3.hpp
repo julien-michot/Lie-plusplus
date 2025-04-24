@@ -367,7 +367,8 @@ class SEn3
    *
    * @return R3 vector
    */
-  [[nodiscard]] const typename SO3Type::VectorType operator*(const typename SO3Type::VectorType& other) const
+   template <typename Derived, typename = typename std::enable_if_t<Derived::RowsAtCompileTime == SO3Type::VectorType::RowsAtCompileTime>>
+   [[nodiscard]] const typename SO3Type::VectorType operator*(const Eigen::MatrixBase<Derived> &other) const
   {
     static_assert(n == 1, "SEn3: SE3 action on R3 (* operator overloading) available only for n = 1");
     return C_.R() * other + t_[0];
